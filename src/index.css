@@ -1,0 +1,411 @@
+@import "fonts.css" screen;
+body {
+  background-color: #F1F6FB;
+}
+
+.containerStart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.audioButton {
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  background-color: #5199FF;
+  width: 150px;
+  height: 30px;
+  color: #FFFFFF;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audioButton p {
+  margin: 0px;
+}
+
+.audioButton:hover {
+  cursor: pointer;
+}
+
+.seaBattle {
+  color: #0351C1;
+  text-align: center;
+  font-size: 48px;
+  margin-top: 30px;
+  font-family: RobotoMedium;
+  display: flex;
+  align-items: center;
+}
+
+.seaBattleInGame {
+  margin-top: 5px;
+}
+
+.seaBattleInt {
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.rules {
+  width: 500px;
+  font-size: 18px;
+  font-family: Roboto;
+  color: #052555;
+  text-align: justify;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.seaBattleBottom {
+  background-color: #5199FF;
+  width: 200px;
+  height: 50px;
+  color: #FFFFFF;
+  margin-top: 30px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seaBattleBottom:hover {
+  cursor: pointer;
+}
+
+.seaBattleBottom p {
+  margin: 0px;
+}
+
+.startGame {
+  background-color: #5199FF;
+  width: 350px;
+  height: 50px;
+  color: #FFFFFF;
+  margin-top: 30px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.startGame:hover {
+  cursor: pointer;
+}
+
+.startGame p {
+  margin: 0px;
+}
+
+.replacing {
+  background-color: #5199FF;
+  width: 350px;
+  height: 50px;
+  color: #FFFFFF;
+  margin-top: 30px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.replacing:hover {
+  cursor: pointer;
+}
+
+.replacing p {
+  margin: 0px;
+}
+
+.leftFieldText {
+  color: #0351C1;
+  text-align: center;
+  font-size: 24px;
+  font-family: RobotoMedium;
+}
+
+.rigthFieldText {
+  color: #0351C1;
+  text-align: center;
+  font-size: 24px;
+  font-family: RobotoMedium;
+}
+
+.field {
+  /*background-color: white;*/
+  display: flex;
+  width: 310px;
+  flex-wrap: wrap;
+}
+
+.square {
+  background-color: #1771F1;
+  height: 30px;
+  width: 30px;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.containerForUserField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerForGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ship4 {
+  background-color: #FFC11E;
+}
+
+.ship3 {
+  background-color: #FFC11E;
+}
+
+.ship2 {
+  background-color: #FFC11E;
+}
+
+.ship1 {
+  background-color: #FFC11E;
+}
+
+.buttonShip4 {
+  width: 120px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #FFC11E;
+  color: #1771F1;
+  font-family: RobotoMedium;
+  font-size: 16px;
+}
+
+.buttonShip4:hover {
+  cursor: pointer;
+}
+
+.buttonShip3 {
+  width: 90px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #FFC11E;
+  color: #1771F1;
+  font-family: RobotoMedium;
+  font-size: 16px;
+}
+
+.buttonShip3:hover {
+  cursor: pointer;
+}
+
+.buttonShip2 {
+  width: 60px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #FFC11E;
+  color: #1771F1;
+  font-family: RobotoMedium;
+  font-size: 16px;
+}
+
+.buttonShip2:hover {
+  cursor: pointer;
+}
+
+.buttonShip1 {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #FFC11E;
+  color: #1771F1;
+  font-family: RobotoMedium;
+  font-size: 16px;
+}
+
+.buttonShip1:hover {
+  cursor: pointer;
+}
+
+.buttomsForChange {
+  display: flex;
+  width: 100%;
+}
+
+.centerField {
+  width: 350px;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.information {
+  font-size: 20px;
+  font-family: RobotoMedium;
+  color: #052555;
+  min-width: 350px;
+  background-color: #E5F0FF;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #5199FF;
+  border-radius: 5px;
+  text-align: center;
+  min-height: 58px;
+}
+
+.informationRed {
+  color: #EE3D48;
+}
+
+.informationGreen {
+  color: #008736;
+}
+
+.arrow {
+  width: 100px;
+  position: absolute;
+  top: 400px;
+  transition: 0.5s;
+}
+
+.arrow180 {
+  transform: rotate(180deg);
+}
+
+.buttomsShips {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  align-items: flex-end;
+}
+
+.buttomAutoPlasing {
+  color: #1771F1;
+  font-size: 16px;
+  width: 50%;
+  height: 30px;
+  font-family: RobotoMedium;
+  background-color: #FFC11E;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #D2AA1B;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.buttomAutoPlasing:hover {
+  cursor: pointer;
+}
+
+.userShip4 {
+  background-color: gold;
+}
+
+.userShip3 {
+  background-color: gold;
+}
+
+.userShip2 {
+  background-color: gold;
+}
+
+.userShip1 {
+  background-color: gold;
+}
+
+.mouseOver4 {
+  background-color: goldenrod;
+}
+
+.mouseOver3 {
+  background-color: goldenrod;
+}
+
+.mouseOver2 {
+  background-color: goldenrod;
+}
+
+.mouseOver1 {
+  background-color: goldenrod;
+}
+
+.mouseOverBad4 {
+  background-color: black;
+}
+
+.mouseOverBad3 {
+  background-color: black;
+}
+
+.mouseOverBad2 {
+  background-color: black;
+}
+
+.mouseOverBad1 {
+  background-color: black;
+}
+
+.crackShip {
+  background-color: brown;
+}
+
+.FailShot {
+  background-color: skyblue;
+}
+
+.notCrackedShip {
+  background-color: gold;
+}
+
+.hover:hover {
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
+
+@media (max-width: 844px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .centerField {
+    margin-top: 50px;
+  }
+  .arrow {
+    transform: rotate(90deg);
+    top: 700px;
+  }
+  .arrow180 {
+    transform: rotate(270deg);
+    top: 700px;
+  }
+  .rigthFieldTextOnlyForSmallScreen {
+    margin-top: 150px;
+  }
+}
+
+@media (max-width: 598px) {
+  .arrow {
+    top: 750px;
+  }
+  .arrow180 {
+    top: 750px;
+  }
+}
