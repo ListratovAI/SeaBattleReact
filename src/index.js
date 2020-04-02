@@ -4,25 +4,41 @@ import './index.css';
 import arrow from './img/arrow.png'
 import helm from './img/helm.png'
 
-class Square extends React.Component {
-   render () {
-       const classes = "square " + ((this.props.whereIsShip===4 || this.props.whereIsShip===3
-       || this.props.whereIsShip===2 || this.props.whereIsShip===1)&&this.props.whoIsThisField==="user"? "userShip4":"") + " " + ((this.props.shipsShadow===4
-           || this.props.shipsShadow===3 || this.props.shipsShadow===2 || this.props.shipsShadow===1 )? "mouseOver4":"")
-       + " " +  ((this.props.shipsShadow===4 && this.props.canPlaceShipHere===false || this.props.shipsShadow===3 &&
-       this.props.canPlaceShipHere===false || this.props.shipsShadow===2 && this.props.canPlaceShipHere===false ||
-        this.props.shipsShadow===1 && this.props.canPlaceShipHere===false)? "mouseOverBad4":"") + " " +
-               (this.props.shooting === true && this.props.whereIsShip ===0? "FailShot":"") + " " +
-           (this.props.shooting === true && this.props.whereIsShip!==0? "crackShip":"") + " " +(this.props.userShoot&&this.props.whoIsThisField==="AI"? "hover":null);
-       return (
-           <div
-               className = {classes}
-               onClick = {this.props.waitForClick? ((this.props.whoIsThisField==="AI")?((this.props.userShoot)?this.props.battleOnClick:null) : this.props.onClick) : null}
-               onMouseOver={this.props.waitForClick&&this.props.whoIsThisField==="user"? this.props.onMouseOver : null}
-               onMouseOut={this.props.waitForClick&&this.props.whoIsThisField==="user"? this.props.onMouseOut : null}
-           />
-       )
-    }
+function Square(props) {
+    function userShips() {
+        return (
+            (props.whereIsShip===4 || props.whereIsShip===3 || props.whereIsShip===2 || props.whereIsShip===1)&&props.whoIsThisField==="user"? "userShip4 ":""
+    )}
+    function shadowShips() {
+        return (
+            props.shipsShadow===4 || props.shipsShadow===3 || props.shipsShadow===2 || props.shipsShadow===1? "mouseOver4 ":""
+    )}
+    function cantShips() {
+        return (
+            (   props.shipsShadow===4 && props.canPlaceShipHere===false || props.shipsShadow===3 &&
+                props.canPlaceShipHere===false || props.shipsShadow===2 && props.canPlaceShipHere===false ||
+                props.shipsShadow===1 && props.canPlaceShipHere===false)? "mouseOverBad4 ":""
+    )}
+    function failShot() {
+        return(
+            props.shooting === true && props.whereIsShip ===0? "FailShot ":""
+    )}
+    function crackShip() {
+        return(
+            props.shooting === true && props.whereIsShip!==0? "crackShip ":""
+    )}
+    function hover() {
+        return(
+            props.userShoot&&props.whoIsThisField==="AI"? "hover ":null
+    )}
+    return (
+        <div
+            className = {"square " + userShips() + shadowShips() + cantShips() + failShot() + crackShip() + hover()}
+            onClick = {props.waitForClick? ((props.whoIsThisField==="AI")?((props.userShoot)?props.battleOnClick:null) : props.onClick) : null}
+            onMouseOver={props.waitForClick&&props.whoIsThisField==="user"? props.onMouseOver : null}
+            onMouseOut={props.waitForClick&&props.whoIsThisField==="user"? props.onMouseOut : null}
+        />
+    )
 }
 
 class BottomsForPlacing extends React.Component{
