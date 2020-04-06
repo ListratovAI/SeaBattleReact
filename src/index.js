@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import arrow from './img/arrow.png'
 import helm from './img/helm.png'
 
+const Context = React.createContext();
+
 function Square(props) {
+    const context = useContext(Context);
     function userShips() {
         return (
-            (props.whereIsShip===4 || props.whereIsShip===3 || props.whereIsShip===2 || props.whereIsShip===1)&&props.whoIsThisField==="user"? "userShip4 ":""
+            (props.whereIsShip===4 || props.whereIsShip===3 || props.whereIsShip===2 || props.whereIsShip===1)&&context.whoIsThisField==="user"? "userShip4 ":""
     )}
     function shadowShips() {
         return (
@@ -29,64 +32,64 @@ function Square(props) {
     )}
     function hover() {
         return(
-            props.userShoot&&props.whoIsThisField==="AI"? "hover ":null
+            context.userShoot&&context.whoIsThisField==="AI"? "hover ":null
     )}
     return (
         <div
             className = {"square " + userShips() + shadowShips() + cantShips() + failShot() + crackShip() + hover()}
-            onClick = {props.waitForClick? ((props.whoIsThisField==="AI")?((props.userShoot)?props.battleOnClick:null) : props.onClick) : null}
-            onMouseOver={props.waitForClick&&props.whoIsThisField==="user"? props.onMouseOver : null}
-            onMouseOut={props.waitForClick&&props.whoIsThisField==="user"? props.onMouseOut : null}
+            onClick = {props.waitForClick? ((context.whoIsThisField==="AI")?((context.userShoot)?props.battleOnClick:null) : props.onClick) : null}
+            onMouseOver={props.waitForClick&&context.whoIsThisField==="user"? props.onMouseOver : null}
+            onMouseOut={props.waitForClick&&context.whoIsThisField==="user"? props.onMouseOut : null}
         />
     )
 }
 
-class BottomsForPlacing extends React.Component{
+class BottomsForPlacing extends React.PureComponent{
     renderShip1(){
-        if (this.props.deleteButton.one.deleteThis === false)
+        if (this.context.deleteButton.one.deleteThis === false)
             return (<button
                 className="buttonShip1"
-                onClick={this.props.onClickButton1}
+                onClick={()=>this.context.onClickButton(1)}
             >
-                    {this.props.deleteButton.one.counterToDelete}
+                    {this.context.deleteButton.one.counterToDelete}
                 </button>
             );
     }
     renderShip2(){
-        if (this.props.deleteButton.two.deleteThis === false)
+        if (this.context.deleteButton.two.deleteThis === false)
             return (<button
                 className="buttonShip2"
-                onClick={this.props.onClickButton2}
+                onClick={()=>this.context.onClickButton(2)}
                 >
-                    {this.props.deleteButton.two.counterToDelete}
+                    {this.context.deleteButton.two.counterToDelete}
                 </button>
             );
     }
     renderShip3(){
-        if (this.props.deleteButton.three.deleteThis===false)
+        if (this.context.deleteButton.three.deleteThis===false)
             return (<button
                 className="buttonShip3"
-                onClick={this.props.onClickButton3}
+                onClick={()=>this.context.onClickButton(3)}
                 >
-                    {this.props.deleteButton.three.counterToDelete}
+                    {this.context.deleteButton.three.counterToDelete}
                 </button>
             );
     }
     renderShip4(){
-        if (this.props.deleteButton.four.deleteThis === false)
+        if (this.context.deleteButton.four.deleteThis === false)
             return (<button
                 className="buttonShip4"
-                onClick={this.props.onClickButton4}
+                onClick={()=>this.context.onClickButton(4)}
                 >
-                    {this.props.deleteButton.four.counterToDelete}
+                    {this.context.deleteButton.four.counterToDelete}
                 </button>
             );
     }
     renderAuto(){
-        if (this.props.whoShoot===null){
+        if (this.context.userShoot===null){
             return (<button
                 className="buttomAutoPlasing"
-                onClick={this.props.onClickButtonAuto}
+                onClick={this.context.onClickButtonAuto}
             >АВТОМАТИЧЕСКИ</button>);
         }
     }
@@ -103,18 +106,11 @@ class BottomsForPlacing extends React.Component{
         )
     }
 }
+BottomsForPlacing.contextType = Context;
 
-class Field extends React.Component {
+class Field extends React.PureComponent {
     addBottomsForPlacing () {
-        return <BottomsForPlacing
-                    onClickButton4 = {() => this.props.onClickButton4()}
-                    onClickButton3 = {() => this.props.onClickButton3()}
-                    onClickButton2 = {() => this.props.onClickButton2()}
-                    onClickButton1 = {() => this.props.onClickButton1()}
-                    onClickButtonAuto = {() => this.props.onClickButtonAuto()}
-                    deleteButton = {this.props.deleteButton}
-                    whoShoot = {this.props.whoShoot}
-                />
+        return <BottomsForPlacing/>
     }
 
     render () {
@@ -131,18 +127,17 @@ class Field extends React.Component {
                    onMouseOver = {() => this.props.onMouseOver(i)}
                    onMouseOut = {() => this.props.onMouseOut(i)}
                    shooting = {this.props.whereIsShip[i].shooting}
-                   whoIsThisField = {this.props.whoIsThisField}
-                   userShoot = {this.props.userShoot}
                />);
             }
         return (
             <div className="field">
                 {massStrings}
-                {(this.props.whoIsThisField === "user")? this.addBottomsForPlacing(): null}
+                {(this.context.whoIsThisField === "user")? this.addBottomsForPlacing(): null}
             </div>
         )
     }
 }
+Field.contextType = Context;
 
 class CenterField extends React.Component {
 
@@ -204,7 +199,7 @@ class CenterField extends React.Component {
     }
 }
 
-class Game extends React.Component {
+class Game extends React.PureComponent {
     constructor(props){
         super(props);
         this.state = {
@@ -1016,14 +1011,16 @@ class Game extends React.Component {
                 intMass = intMassTemp.slice();
                 let counter = this.state.AICounter;
                 --counter;
-                if (counter===0){
-                    alert("Вы победили!");
-                }
                 this.setState({
                     AICounter: counter,
                     textOnScreen:"Вы потопили однопалубный",
                     colorScreen: false,
-                })
+                });
+                if (counter===0){
+                    this.setState({
+                        textOnScreen:"Вы победили!",
+                    });
+                }
             }
             else if (this.state.fieldAI[i].shipIsHere === 2){
                 if (this.state.fieldAI[i].numberOfShip === 1){
@@ -1448,12 +1445,15 @@ class Game extends React.Component {
                         <div className="leftFieldText">
                             <p>Поле противника</p>
                         </div>
-                        <Field
-                             whoIsThisField = "AI"
-                            whereIsShip = {this.state.fieldAI}
-                            battleOnClick = {(i)=>this.battleUser(i)}
-                            userShoot = {this.state.userShoot}
-                        />
+                        <Context.Provider value = {{
+                            userShoot: this.state.userShoot,
+                            whoIsThisField: "AI"
+                        }}>
+                            <Field
+                                whereIsShip = {this.state.fieldAI}
+                                battleOnClick = {(i)=>this.battleUser(i)}
+                            />
+                        </Context.Provider>
                     </div>
                     <CenterField
                         clickOnStartGame = {()=>this.clickOnStartGame()}
@@ -1468,20 +1468,20 @@ class Game extends React.Component {
                         <div className="leftFieldText">
                             <p>Ваше поле</p>
                         </div>
-                        <Field
-                            whoIsThisField = "user"
-                            whereIsShip = {this.state.fieldUser}
-                            onClickButton4 = {() => this.addEventClickForField(4)}
-                            onClickButton3 = {() => this.addEventClickForField(3)}
-                            onClickButton2 = {() => this.addEventClickForField(2)}
-                            onClickButton1 = {() => this.addEventClickForField(1)}
-                            onClickButtonAuto = {() => this.autoPlasingShip()}
-                            onClick = {(i) => this.handlePlasingShip(i)}
-                            onMouseOver = {(i) => this.handleOverShip(i)}
-                            onMouseOut = {(i) => this.handleOutShip(i)}
-                            deleteButton = {this.state.deleteBotton}
-                            whoShoot = {this.state.userShoot}
-                        />
+                        <Context.Provider value = {{
+                            deleteButton: this.state.deleteBotton,
+                            userShoot: this.state.userShoot,
+                            onClickButton: (i) => this.addEventClickForField(i),
+                            onClickButtonAuto: () => this.autoPlasingShip(),
+                            whoIsThisField: "user"
+                        }}>
+                            <Field
+                                whereIsShip = {this.state.fieldUser}
+                                onClick = {(i) => this.handlePlasingShip(i)}
+                                onMouseOver = {(i) => this.handleOverShip(i)}
+                                onMouseOut = {(i) => this.handleOutShip(i)}
+                            />
+                        </Context.Provider>
                     </div>
                 </div>
             </div>
